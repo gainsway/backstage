@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backstage:
+    image: backstage
+    environment:
+      # This value must match the name of the postgres configuration block.
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+    ports:
+      - '7007:7007'
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      # connections.
+      POSTGRES_HOST_AUTH_METHOD: trust
