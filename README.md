@@ -1,6 +1,10 @@
-# [Backstage](https://backstage.io)
+# [Gainsway Backstage](https://backstage.io)
 
-This is your newly scaffolded Backstage App, Good Luck!
+## Prerequisites
+
+Copy at the root level of the repo the local file `github-app-backstage-gainsway-local-credentials` from the Engineering vault.
+
+## Local run
 
 To start the app, run:
 
