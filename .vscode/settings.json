@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "**/.github/*.yml",
+        "https://json.schemastore.org/app-config.json": "file:///Users/overbit/workspaces/gainsway/backstage/templates/dotnet-api/template.yaml"
+    }
+}
