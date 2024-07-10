@@ -123,3 +123,11 @@ catalog:
         schedule:
           frequency: { minutes: 1 }
           timeout: { minutes: 3 }
+    githubOrg:
+      id: production
+      githubUrl: https://github.com
+      orgs: ['gainsway']
+      schedule:
+        initialDelay: { seconds: 1 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
