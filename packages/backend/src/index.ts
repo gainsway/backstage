@@ -1,10 +1,43 @@
 import { createBackend } from '@backstage/backend-defaults';
+import { createBackendModule } from '@backstage/backend-plugin-api';
+import { camelCase, kebabCase, snakeCase, startCase } from 'lodash';
+import { scaffolderTemplatingExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
+
+const scaffolderModuleCustomFilters = createBackendModule({
+  pluginId: 'scaffolder', // name of the plugin that the module is targeting
+  moduleId: 'custom-filters',
+  register(env) {
+    env.registerInit({
+      deps: {
+        scaffolder: scaffolderTemplatingExtensionPoint,
+        // ... and other dependencies as needed
+      },
+      async init({ scaffolder /* ..., other dependencies */ }) {
+        scaffolder.addTemplateFilters({
+          camelCase: (...args: any[]) => {
+            return args.map(arg => camelCase(arg));
+          },
+          pascalCase: (...args: any[]) => {
+            return args.map(arg => startCase(camelCase(arg)).replace(/ /g, ''));
+          },
+          kebabCase: (...args: any[]) => {
+            return args.map(arg => kebabCase(arg));
+          },
+          snakeCase: (...args: any[]) => {
+            return args.map(arg => snakeCase(arg));
+          },
+        });
+      },
+    });
+  },
+});
 
 const backend = createBackend();
 
 backend.add(import('@backstage/plugin-app-backend/alpha'));
 backend.add(import('@backstage/plugin-proxy-backend/alpha'));
 backend.add(import('@backstage/plugin-scaffolder-backend/alpha'));
+backend.add(scaffolderModuleCustomFilters());
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
 
 backend.add(import('@backstage/plugin-techdocs-backend/alpha'));
