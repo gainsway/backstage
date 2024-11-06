@@ -111,7 +111,7 @@ catalog:
     github:
       catalogProvider:
         organization: 'gainsway'
-        catalogPath: '**/catalog-info.yaml'
+        catalogPath: '**/**/catalog-info.yaml'
         filters:
           repository: '.*'
         schedule:
